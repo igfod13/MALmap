@@ -1,0 +1,53 @@
+{
+  "type": "network",
+  "version": "1.0",
+  "data": "data.json",
+  "logo": {
+    "text": "igfod13",
+    "file": "",
+    "link": ""
+  },
+  "text": {
+    "title": "MyAnimeList Recommendations Visualization",
+    "more": "A visualization of anime using MyAnimeList reccomendations. Recommendation data was taken by scraping MyAnimeList.net on the Wayback Machine on May 26, 2015 since MAL is not currently issuing whitelists; therefore, data is not perfectly accurate but still gets the point across.\n\nThe graph was created in Gephi using ForceAtlas and Expansion. The colors of anime were obtained by running modularity in Gephi.",
+    "intro": "MALmap: A interactive map of anime based on MyAnimeList recommendations. "
+  },
+  "legend": {
+    "edgeLabel": "Number of Recommendations",
+    "colorLabel": "Modularity",
+    "nodeLabel": "Anime"
+  },
+  "features": {
+    "search": true,
+    "groupSelectorAttribute": false,
+    "hoverBehavior": "dim"
+  },
+  "informationPanel": {
+    "imageAttribute": false,
+    "groupByEdgeDirection": false
+  },
+  "sigma": {
+    "graphProperties": {
+      "minEdgeSize": 0.2,
+      "maxNodeSize": 7,
+      "maxEdgeSize": 0.5,
+      "minNodeSize": 1
+    },
+    "drawingProperties": {
+      "labelThreshold": 10,
+      "hoverFontStyle": "bold",
+      "defaultEdgeType": "curve",
+      "defaultLabelColor": "#000",
+      "defaultLabelHoverColor": "#fff",
+      "defaultLabelSize": 14,
+      "activeFontStyle": "bold",
+      "fontStyle": "bold",
+      "defaultHoverLabelBGColor": "#002147",
+      "defaultLabelBGColor": "#ddd"
+    },
+    "mouseProperties": {
+      "minRatio": 0.75,
+      "maxRatio": 20
+    }
+  }
+}
