@@ -8,9 +8,9 @@
     "link": ""
   },
   "text": {
-    "title": "MyAnimeList Recommendations Visualization",
-    "more": "A visualization of anime using MyAnimeList reccomendations. Recommendation data was taken by scraping MyAnimeList.net on the Wayback Machine on May 26, 2015 since MAL is not currently issuing whitelists; therefore, data is not perfectly accurate but still gets the point across.\n\nThe graph was created in Gephi using ForceAtlas and Expansion. The colors of anime were obtained by running modularity in Gephi.",
-    "intro": "MALmap: A interactive map of anime based on MyAnimeList recommendations. "
+    "title": "MALmap",
+    "more": "MALmap is a visualization of anime using MyAnimeList recommendations. Recommendation data was taken by scraping MyAnimeList.net on the Wayback Machine on May 26, 2015 since MAL was not issuing whitelists; therefore, data is not perfectly accurate but still gets the point across. The graph was created in Gephi using ForceAtlas, Expansion, and slight Label Adjusting. The different colors of anime were obtained by running modularity in Gephi. This site was made using the Sigma.js exporter for Gephi. <br><br>Image form of this visualization, as well as a few other maps of the data, can be found <a href=\"http:\/\/imgur.com\/a\/DuATF\/\">here</a>. <br><br>This page was created by igfod13. You can PM /u/igfod13 on reddit if you have any questions, suggestions, or if you would like to help make MALmap even better.",
+    "intro": "An interactive map of anime based on <a href=\"http:\/\/myanimelist.net\/\">MyAnimeList</a> recommendations. "
   },
   "legend": {
     "edgeLabel": "Number of Recommendations",
@@ -29,17 +29,17 @@
   "sigma": {
     "graphProperties": {
       "minEdgeSize": 0.2,
-      "maxNodeSize": 7,
-      "maxEdgeSize": 0.5,
-      "minNodeSize": 1
+      "maxNodeSize": 3,
+      "maxEdgeSize": 25,
+      "minNodeSize": 0.1
     },
     "drawingProperties": {
-      "labelThreshold": 10,
+      "labelThreshold": 5,
       "hoverFontStyle": "bold",
-      "defaultEdgeType": "curve",
-      "defaultLabelColor": "#000",
+      "defaultEdgeType": "straight",
+      "defaultLabelColor": "#fff",
       "defaultLabelHoverColor": "#fff",
-      "defaultLabelSize": 14,
+      "defaultLabelSize": 16,
       "activeFontStyle": "bold",
       "fontStyle": "bold",
       "defaultHoverLabelBGColor": "#002147",
