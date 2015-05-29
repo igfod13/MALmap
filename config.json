@@ -4,8 +4,8 @@
   "data": "data.json",
   "logo": {
     "text": "igfod13",
-    "file": "",
-    "link": ""
+    "file": "images/malmaplogo.png",
+    "link": "http://igfod13.github.io/MALmap/"
   },
   "text": {
     "title": "MALmap",
