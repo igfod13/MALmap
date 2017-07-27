@@ -60,7 +60,9 @@ function initSigma(config) {
         defaultEdgeType: "curve",
         hoverFontStyle: "bold",
         fontStyle: "bold",
-        activeFontStyle: "bold"
+        activeFontStyle: "bold",
+		defaultNodeActiveColor: "#fff",
+	    nodeActiveColor: "#fff"
     };
     
     if (config.sigma && config.sigma.graphProperties)	
@@ -443,16 +445,19 @@ function nodeActive(a) {
     sigInst.neighbors = {};
     sigInst.detail = !0;
     var b = sigInst._core.graph.nodesIndex[a];
+	var oldColor = b.color; //igfod13 
+	
     showGroups(!1);
 	var outgoing={},incoming={},mutual={};//SAH
     sigInst.iterEdges(function (b) {
         b.attr.lineWidth = !1;
         b.hidden = !0;
-        
+    
         n={
             name: b.label,
             colour: b.color
-        };
+
+		};
         
    	   if (a==b.source) outgoing[b.target]=n;		//SAH
 	   else if (a==b.target) incoming[b.source]=n;		//SAH
@@ -465,7 +470,7 @@ function nodeActive(a) {
         a.attr.lineWidth = !1;
         a.attr.color = a.color
     });
-    
+    //1______
     if (groupByDirection) {
 		//SAH - Compute intersection for mutual and remove these from incoming/outgoing
 		for (e in outgoing) {
@@ -542,9 +547,10 @@ function nodeActive(a) {
 	}
 	//b is object of active node -- SAH
     b.hidden = !1;
-    b.attr.color = b.color;
     b.attr.lineWidth = 6;
     b.attr.strokeStyle = "#000000";
+	b.color = "#ffffff" //igfod13
+	b.attr.color = b.color;
     sigInst.draw(2, 2, 2, 2);
 
     $GP.info_link.find("ul").html(f.join(""));
@@ -553,7 +559,10 @@ function nodeActive(a) {
             b = a.attr("rel");
     });
     f = b.attr;
-    if (f.attributes) {
+
+    b.color = oldColor; //igfod13
+	
+	if (f.attributes) {
   		var image_attribute = false;
   		if (config.informationPanel.imageAttribute) {
   			image_attribute=config.informationPanel.imageAttribute;
@@ -587,6 +596,8 @@ function nodeActive(a) {
 	$GP.info_donnees.show();
     sigInst.active = a;
     window.location.hash = b.label;
+	
+
 }
 
 function showCluster(a) {
