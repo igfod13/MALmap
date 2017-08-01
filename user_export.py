@@ -20,8 +20,11 @@ __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(sys.ar
 anime_list = pickle.load(open(os.path.join(__location__, 'save.p'), 'rb'))
 
 # username = "igfod13"
-username = raw_input("Username: ")
-
+try:
+	username = raw_input("Username: ")
+except:
+	username = input("Username: ")
+	
 # Load user's anime list
 url = "https://myanimelist.net/malappinfo.php?status=all&type=anime&u=" + username
 response = requests.get(url)
