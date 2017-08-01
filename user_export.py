@@ -5,7 +5,7 @@ import requests
 import xml.etree.ElementTree as ET
 import json
 import collections
-import cPickle as pickle
+import pickle
 
 class Anime:
     def __init__(self, id_num):
