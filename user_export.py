@@ -66,7 +66,7 @@ p3 = np.percentile(a, 40)
 # MAL status IDS: 1 = watching, 2 = completed, 3 = on hold, 4 = dropped, 6 = plan to watch
 # Additional IDS: 9 = highly ranked by user, 10-13 = top 0-10/10-30/30-60/60-100% ranked unwatched
 for cur_id, a in anime_list.items():
-    if user_list.has_key(cur_id):
+    if cur_id in user_list:
         if user_list[cur_id] == 2 and user_score_list[cur_id] > user_percentile:
                 a.user_status = 9
         else:
