@@ -82,7 +82,7 @@ for cur_id, a in anime_list.items():
             a.user_status = 13
             
 # Load exported data file from Gephi
-with open('data.json') as data_file:
+with open(os.path.join(__location__, 'data.json')) as data_file:
     sigma_data = json.load(data_file)
     data_file.close()
 
@@ -134,5 +134,5 @@ for d in sigma_data['edges']:
     d['color'] = 'rgb(75,75,75)'
 
 # Export new data file
-with open('data.json', 'w') as outfile:  
+with open(os.path.join(__location__, 'data.json'), 'w') as outfile:  
     json.dump(sigma_data, outfile)
