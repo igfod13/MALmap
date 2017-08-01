@@ -6,6 +6,8 @@ import xml.etree.ElementTree as ET
 import json
 import collections
 import pickle
+import os
+import sys
 
 class Anime:
     def __init__(self, id_num):
@@ -14,7 +16,8 @@ class Anime:
 # Export user's MAL network graph
 
 # Import anime_list object
-anime_list = pickle.load(open('save.p', 'rb'))
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])))
+anime_list = pickle.load(open(os.path.join(__location__, 'save.p'), 'rb'))
 
 # username = "igfod13"
 username = raw_input("Username: ")
