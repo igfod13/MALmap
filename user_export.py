@@ -103,9 +103,9 @@ for d in sigma_data['nodes']:
             genre_str = genre_str + ', '
         genre_str = genre_str + g
     attr['Genres'] = genre_str
-    cur_url = '<a href="https://myanimelist.net/anime/' + str(cur_id) + '">' + a.name.encode('utf-8') + '</a>'
+    cur_url = '<a href="https://myanimelist.net/anime/' + str(cur_id) + '">' + a.name + '</a>'
     attr['MAL Link'] = cur_url
-    attr['Synopsis'] = a.synopsis.encode('utf-8')
+    attr['Synopsis'] = a.synopsis
     attr['Image'] = a.img_url
     d['attributes'] = attr
     # Set node colors
