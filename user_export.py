@@ -1,11 +1,6 @@
-from bs4 import BeautifulSoup
-import urllib
-import urllib2
 import re
 import time
 import numpy as np
-import networkx as nx
-import csv
 import requests
 import xml.etree.ElementTree as ET
 import json
