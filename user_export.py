@@ -52,7 +52,10 @@ for i, a in user_score_list.items():
     if a != 0:
         user_data.append(a)
 a = np.array(user_data)
-user_percentile = np.percentile(a, 65)
+if len(a) > 0:
+    user_percentile = np.percentile(a, 65)
+else:
+    user_percentile = 0
 
 # Get total score distribution
 data = []
