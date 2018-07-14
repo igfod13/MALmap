@@ -9,7 +9,7 @@
   },
   "text": {
     "title": "MALmap-manga",
-    "more": "MALmap-manga is a visualization of manga using MyAnimeList recommendations. MALMap uses a force-directed layout, which draws mutually recommended manga closer together, while pushing away all other manga, offering a nice gradient of how different manga relate to each other. Each node represents a manga, while the thickness of each edge represents the number of recommendations on MyAnimeList made between the two manga. Recommendations between manga are only recorded if they are made by two or more users. <br><br>Recommendation data was taken from MyAnimeList.net on August 5, 2017. This graph was created in Gephi using ForceAtlas and slight Label Adjusting. The different colors representing each manga were obtained by running the Louvain method for community detection, which ends up highlighting the different manga genres pretty well. This site was made using the Sigma.js exporter for Gephi. <br><br>This page was created by igfod13 and the source code can be found on <a href=\"https:\/\/github.com\/igfod13\/MALmap\">Github</a>. If you have any questions or suggestions, feel free to PM me on reddit(/u/igfod13) or on MyAnimeList(igfod13). If you are interested in seeing your MyAnimeList mapped to the visualization, follow the instructions on Github or let me know and I can send it to you (hopefully I will find a way to automate this in the future).",
+    "more": "MALmap-manga is a visualization of manga using MyAnimeList recommendations. MALMap uses a force-directed layout, which draws mutually recommended manga closer together, while pushing away all other manga, offering a nice gradient of how different manga relate to each other. Each node represents a manga, while the thickness of each edge represents the number of recommendations on MyAnimeList made between the two manga. Recommendations between manga are only recorded if they are made by two or more users. <br><br>Recommendation data was taken from MyAnimeList.net on July 13, 2018. This graph was created in Gephi using ForceAtlas and slight Label Adjusting. The different colors representing each manga were obtained by running the Louvain method for community detection, which ends up highlighting the different manga genres pretty well. This site was made using the Sigma.js exporter for Gephi. <br><br>This page was created by igfod13 and the source code can be found on <a href=\"https:\/\/github.com\/igfod13\/MALmap\">Github</a>. If you have any questions or suggestions, feel free to PM me on reddit(/u/igfod13) or on MyAnimeList(igfod13). If you are interested in seeing your MyAnimeList mapped to the visualization, follow the instructions on Github or let me know and I can send it to you (hopefully I will find a way to automate this in the future).",
     "intro": "An interactive map of manga based on <a href=\"http:\/\/myanimelist.net\/\">MyAnimeList</a> recommendations. <br><br>Scroll to zoom, click+drag to move, and select circles to see more information on the manga. <br><br>For a map of anime: <a href=\"index.html\">MALmap</a>."
   },
   "legend": {
@@ -29,12 +29,12 @@
   "sigma": {
     "graphProperties": {
       "minEdgeSize": 0.25,
-      "maxNodeSize": 3,
-      "maxEdgeSize": 25,
+      "maxNodeSize": 2.75,
+      "maxEdgeSize": 12.5,
       "minNodeSize": 0.1
     },
     "drawingProperties": {
-      "labelThreshold": 4,
+      "labelThreshold": 4.5,
       "hoverFontStyle": "bold",
       "defaultEdgeType": "straight",
       "defaultLabelColor": "#fff",
