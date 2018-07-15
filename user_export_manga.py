@@ -19,27 +19,58 @@ class Manga:
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])))
 manga_list = pickle.load(open(os.path.join(__location__, 'save_manga.p'), 'rb'))
 
-# username = "igfod13"
+list_file = ''
+
 try:
-	username = raw_input("Username: ")
+    input_type = raw_input("Use file?(y/n): ")
 except:
-	username = input("Username: ")
-	
-# Load user's anime list
-url = "https://myanimelist.net/malappinfo.php?status=all&type=manga&u=" + username
-response = requests.get(url)
-# print (response.status_code)
-tree = ET.fromstring(response.content)
+    input_type = input("Use file?(y/n): ")
+if input_type == 'y':
+    use_file = True
+else:
+    use_file = False
+    
+if use_file:
+    if list_file == '':
+        try:
+            list_file = raw_input("File name: ")
+        except:
+            list_file = input("File name: ")
+    tree = ET.parse(list_file).getroot()
+else:
+    # username = "igfod13"
+    try:
+        username = raw_input("Username: ")
+    except:
+        username = input("Username: ")
+    # Load user's anime list
+    url = "https://myanimelist.net/malappinfo.php?status=all&type=manga&u=" + username
+    response = requests.get(url)
+    # print (response.status_code)
+    tree = ET.fromstring(response.content)
 
 # Retrieve user data
 user_list = {}
 user_score_list ={}
 for manga in tree:
     for item in manga:
-        if item.tag == 'series_mangadb_id':
+        if item.tag == 'manga_mangadb_id':
             temp_id = int(item.text)
         if item.tag == 'my_status':
-            temp_status = int(item.text)
+            if use_file:
+                status_name = item.text
+                if status_name == 'Reading':
+                    temp_status = 1
+                elif status_name == 'Completed':
+                    temp_status = 2
+                elif status_name == 'On Hold':
+                    temp_status = 3
+                elif status_name == 'Dropped':
+                    temp_status = 4
+                else:
+                    temp_status = 6
+            else:
+                temp_status = int(item.text)    
         if item.tag == 'my_score':
             temp_score = int(item.text)
     if manga.tag == 'manga':
