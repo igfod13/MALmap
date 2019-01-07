@@ -9,7 +9,7 @@
   },
   "text": {
     "title": "MALmap",
-    "more": "MALmap is a visualization of anime using MyAnimeList recommendations. MALMap uses a force-directed layout, which draws mutually recommended anime closer together, while pushing away all other anime series, offering a nice gradient of how different series relate to each other. Each node represents an anime series, while the thickness of each edge represents the number of recommendations on MyAnimeList made between the two series. Recommendations between anime are only recorded if they are made by three or more users (as opposed to two before, due to density issues). <br><br>This graph was created in Gephi using the ForceAtlas layout. The different colors representing each series were obtained by running the Louvain method for community detection, which ends up highlighting the different anime genres pretty well. This site was made using the Sigma.js exporter for Gephi. <br><br>This page was created by igfod13 and the source code can be found on <a href=\"https:\/\/github.com\/igfod13\/MALmap\">Github</a>. If you have any questions or suggestions, feel free to PM me on reddit(/u/igfod13) or on MyAnimeList(igfod13). If you are interested in seeing your MyAnimeList mapped to the visualization, follow the instructions on Github or let me know and I can also send it to you (hopefully I will find a way to automate this in the future). <br><br>Recommendation data was last updated from MyAnimeList.net on October 5, 2018. ",
+    "more": "MALmap is a visualization of anime using MyAnimeList recommendations. MALMap uses a force-directed layout, which draws mutually recommended anime closer together, while pushing away all other anime series, offering a nice gradient of how different series relate to each other. Each node represents an anime series, while the thickness of each edge represents the number of recommendations on MyAnimeList made between the two series. Recommendations between anime are only recorded if they are made by three or more users (as opposed to two before, due to density issues). <br><br>This graph was created in Gephi using the ForceAtlas layout. The different colors representing each series were obtained by running the Louvain method for community detection, which ends up highlighting the different anime genres pretty well. This site was made using the Sigma.js exporter for Gephi. <br><br>This page was created by igfod13 and the source code can be found on <a href=\"https:\/\/github.com\/igfod13\/MALmap\">Github</a>. If you have any questions or suggestions, feel free to PM me on reddit(/u/igfod13) or on MyAnimeList(igfod13). If you are interested in seeing your MyAnimeList mapped to the visualization, follow the instructions on Github or let me know and I can also send it to you (hopefully I will find a way to automate this in the future). <br><br>Recommendation data was last updated from MyAnimeList.net on January 6, 2019. ",
     "intro": "An interactive network graph of anime based on <a href=\"http:\/\/myanimelist.net\/\">MyAnimeList</a> recommendations. <br><br>Scroll to zoom, click+drag to move, and select circles to see more information on the anime. Not mobile friendly. :(<br><br>For a map of manga: <a href=\"manga.html\">MALmap-manga</a>."
   },
   "legend": {
@@ -29,7 +29,7 @@
   "sigma": {
     "graphProperties": {
       "minEdgeSize": 0.25,
-      "maxNodeSize": 2.25,
+      "maxNodeSize": 2.4,
       "maxEdgeSize": 15,
       "minNodeSize": 0.1
     },
