@@ -30,53 +30,74 @@ if input_type == 'y':
 else:
     use_file = False
     
+"""
+try:
+    username = raw_input("Username: ")
+except:
+    username = input("Username: ")
+# Load user's anime list
+    
+url = 'https://myanimelist.net/animelist/' + username + '/load.json?status=7&offset=0'
+# url = "https://myanimelist.net/malappinfo.php?status=all&type=anime&u=" + username
+response = requests.get(url)
+list_json = response.json()
+# tree = ET.fromstring(response.content)
+"""
+    
+# Retrieve user data
+user_list = {}
+user_score_list ={}
+
 if use_file:
+    # Use xml export file
     if list_file == '':
         try:
             list_file = raw_input("File name: ")
         except:
             list_file = input("File name: ")
     tree = ET.parse(list_file).getroot()
+    for anime in tree:
+        for item in anime:
+            if item.tag == 'series_animedb_id':
+                temp_id = int(item.text)
+            if item.tag == 'my_status':
+                if use_file:
+                    status_name = item.text
+                    if status_name == 'Watching':
+                        temp_status = 1
+                    elif status_name == 'Completed':
+                        temp_status = 2
+                    elif status_name == 'On Hold':
+                        temp_status = 3
+                    elif status_name == 'Dropped':
+                        temp_status = 4
+                    else:
+                        temp_status = 6                
+                else:
+                    temp_status = int(item.text)
+            if item.tag == 'my_score':
+                temp_score = int(item.text)
+        if anime.tag == 'anime':
+            user_list[temp_id] = temp_status
+            user_score_list[temp_id] = temp_score
 else:
-    # username = "igfod13"
+    # Retrieve from MAL
     try:
         username = raw_input("Username: ")
     except:
         username = input("Username: ")
-    # Load user's anime list
-    url = "https://myanimelist.net/malappinfo.php?status=all&type=anime&u=" + username
+    # Load user's anime list    
+    url = 'https://myanimelist.net/animelist/' + username + '/load.json?status=7&offset=0'
+    # url = "https://myanimelist.net/malappinfo.php?status=all&type=anime&u=" + username
     response = requests.get(url)
-    # print (response.status_code)
-    tree = ET.fromstring(response.content)
-
-# Retrieve user data
-user_list = {}
-user_score_list ={}
-for anime in tree:
-    for item in anime:
-        if item.tag == 'series_animedb_id':
-            temp_id = int(item.text)
-        if item.tag == 'my_status':
-            if use_file:
-                status_name = item.text
-                if status_name == 'Watching':
-                    temp_status = 1
-                elif status_name == 'Completed':
-                    temp_status = 2
-                elif status_name == 'On Hold':
-                    temp_status = 3
-                elif status_name == 'Dropped':
-                    temp_status = 4
-                else:
-                    temp_status = 6               
-            else:
-                temp_status = int(item.text)
-        if item.tag == 'my_score':
-            temp_score = int(item.text)
-    if anime.tag == 'anime':
+    list_json = response.json()
+    for item in list_json:
+        temp_id = int(item['anime_id'])
+        temp_status = int(item['status'])
+        temp_score = int(item['score'])
         user_list[temp_id] = temp_status
         user_score_list[temp_id] = temp_score
-
+ 
 # Get user's score distribution
 user_data = []    
 for i, a in user_score_list.items():
