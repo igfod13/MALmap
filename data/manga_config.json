@@ -17,11 +17,10 @@
     "edgeColor": "#888",
     "borderWidth": 3,
     "filteredColor": "#555",
-    "hiddenColor": "#000",
+    "hiddenColor": "#333",
     "selectedColor": "#fff",
     "userNodeColor": "#222",
     "selectedNodeZoom": 0.1,
     "animationTime": 300
   }
-    
 }
