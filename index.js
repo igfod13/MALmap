@@ -483,7 +483,8 @@ function searchSeries() {
             //TODO?: Sort results by likely matches
             if (series.name.toLowerCase().includes(input) || 
                 emptyIfNull(series.engName).toLowerCase().includes(input) ||
-                emptyIfNull(series.jpName).toLowerCase().includes(input)) {
+                emptyIfNull(series.jpName).toLowerCase().includes(input) ||
+                series.altNames.some(name => name.toLowerCase().includes(input))) {
 
                 searchResults.append(`<a href="javascript:void(0)" onclick="selectNodeById(${series.id})"` +
                                      `onmouseover="induceNodeHover(${series.id})" onmouseout="induceNodeUnhover(${series.id})">` + 
@@ -557,10 +558,8 @@ function zoom(out) {
     const c = sigmaInst.camera;
     let zoomRatio = out ? (c.ratio * c.settings('zoomingRatio')) :
                           (c.ratio / c.settings('zoomingRatio'));
-    if (out)
-        zoomRatio = Math.min(zoomRatio, config.sigma.zoomMax);
-    else
-        zoomRatio = Math.max(zoomRatio, config.sigma.zoomMin);
+    zoomRatio = out ? Math.min(zoomRatio, config.sigma.zoomMax) :
+                      Math.max(zoomRatio, config.sigma.zoomMin);
     if (zoomRatio != c.ratio) {
         sigma.misc.animation.camera(
             c, 
