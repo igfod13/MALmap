@@ -189,7 +189,7 @@ function initGraph(data) {
         graph: g,
         renderer: {
             type: 'canvas',
-            container: $('#sigma-container')[0],
+            container: $("#sigma-container")[0],
         },
         settings: settings
     });
@@ -197,7 +197,7 @@ function initGraph(data) {
     // Bind events
     sigmaInst.bind("clickNode", e => selectNode(e.data.node));
     sigmaInst.bind("overNode", e => hoverNode(e.data.node));
-    sigmaInst.bind("outNode", () => refreshGraph());
+    sigmaInst.bind("outNode", () => unhoverNode());
 
     // Draw graph
     sigmaInst.refresh();
@@ -436,6 +436,8 @@ function unselectNodes() {
 /** Redraws graph upon node hovering. Makes all non-neighbor nodes and edges black,
  *  and redraws neighboring edges on top */
 function hoverNode(node) {
+    // Change pointer 
+    $("#sigma-container")[0].style.cursor = 'pointer';
     // Reset node color and label if it was previously filtered out
     const series = seriesMap.get(node.id);
     node.color = series.color;
@@ -455,6 +457,14 @@ function hoverNode(node) {
             sigmaInst.graph.bringEdgeToTop(e);
     }
     sigmaInst.refresh({ skipIndexation: true });
+}
+
+/** Refresh the graph after a node is unhovered */
+function unhoverNode() {
+    // Revert pointer 
+    $("#sigma-container")[0].style.cursor = 'default';
+    // Refresh graph
+    refreshGraph();
 }
 
 /** Applies the hover effect on a node */
