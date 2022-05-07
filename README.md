@@ -1,11 +1,8 @@
-# MALmap
-An interactive map of anime based on MyAnimeList recommendations.
+# MALmap (V2)
+An interactive map of anime based on MyAnimeList recommendations. Graph visualization is built on sigma.js.
+Data is currently retrieved in the jupyter notebook - will port it to a python script at some point.
 
-If you wish to see your MyAnimeList list mapped to the graph like this:
-![Imgur](https://i.imgur.com/rAwYyknl.png?1)
-
-1. Download the repo.
-2. Run the python script user_export.py for anime or user_export_manga.py for manga. (In terminal, type: python user_export.py) Alternatively, I can send you the file if you PM me on MyAnimeList: igfod13 or Reddit: /u/igfod13.
-3. Open index.html for anime and manga.html for manga(only works in Firefox or on a web server).
+Feature suggestions welcome!
 
 See the [MyAnimelist forum topic](https://myanimelist.net/forum/?topicid=1388802) for more info.
+
