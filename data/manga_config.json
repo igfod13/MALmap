@@ -14,7 +14,7 @@
     "zoomMin": 0.025
   },
   "graph": {
-    "edgeColor": "#888",
+    "edgeColor": "#777",
     "borderWidth": 3,
     "filteredColor": "#555",
     "hiddenColor": "#333",
