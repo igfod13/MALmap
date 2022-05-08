@@ -259,7 +259,6 @@ async function selectNewNode(node) {
     else
         nodeHistory.push(node.id);
     currHistIdx++;
-    console.log(nodeHistory);
     await selectNode(node);
 }
 
@@ -388,6 +387,7 @@ function setNominalNodeColor(node){
             const status = userDataSeries.list_status.status;
             switch (status) {
                 case 'watching':
+                case 'reading':
                     node.borderColor = "#2db039";
                     break;
                 case 'completed':
