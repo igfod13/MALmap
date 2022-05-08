@@ -40,22 +40,25 @@
 
       <!-- Zoom buttons  -->
       <span class="sub-header">
-        Zoom: &emsp;&emsp;&ensp;
-        | <button class="zoom-btn" onclick="zoom(out=false)"> &plus; </button> 
-        | <button class="zoom-btn" onclick="zoom(out=true)"> &minus; </button>
-        | <button class="zoom-btn" onclick="resetZoom()"> &bull; </button>  |
+        Zoom: &ensp;&ensp;
+        | <button class="zoom-btn" onclick="zoom(out=false)" title="Zoom in"> &plus; </button> 
+        | <button class="zoom-btn" onclick="zoom(out=true)" title="Zoom out"> &minus; </button>
+        | <button class="zoom-btn" onclick="resetZoom()" title="Reset zoom"> &bull; </button>
+        | | | <button class="zoom-btn" onclick="backNode()" title="Back"> < </button>
+        | <button class="zoom-btn" onclick="forwardNode()" title="Forward"> > </button>  |
       </span>
 
       <!-- User filter -->
       <div class="sub-header"> MAL User </div>
       <span>
-        <input type="text" id="user-filter" class="searchbar" placeholder="Username" onkeyup="enterUser(event)">
+        <input type="text" id="user-filter" class="searchbar" placeholder="Username" onkeyup="enterUser(event)" 
+               title="Enter a username to highlight a user's MAL list">
         <a href="javascript:void(0)" class="clear-btn" onclick="clearUser()">&times;</a>
       </span>
 
       <!-- Filters -->
       <details>
-        <summary class="sub-header clickable"> Filters </summary>
+        <summary class="sub-header clickable" title="Filter by genre, score, and year"> Filters </summary>
         
         <!-- Genre filter -->
         <div class="sub-header"> Genres </div>

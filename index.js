@@ -9,6 +9,8 @@ let scoreThreshold = 0;    // minimum score shown
 let selectedNodeId = null; // selected node id
 let userData = null;       // data retrieved for a user
 let isAnimeGraph = true;   // whether graph is for anime of manga
+let nodeHistory = [];      // visited node id history 
+let currHistIdx = -1;      // current index in node history
 
 /** Initialize the site */
 function init(isAnime) {
@@ -195,7 +197,7 @@ function initGraph(data) {
     });
 
     // Bind events
-    sigmaInst.bind("clickNode", e => selectNode(e.data.node));
+    sigmaInst.bind("clickNode", e => selectNewNode(e.data.node));
     sigmaInst.bind("overNode", e => hoverNode(e.data.node));
     sigmaInst.bind("outNode", () => unhoverNode());
 
@@ -243,6 +245,30 @@ async function selectNode(node) {
     await displaySeriesData(node.id)
 }
 
+/** Selects a node using the node id */
+async function selectNodeById(nodeId) {
+    const node = sigmaInst.graph.nodes().find(n => n.id == nodeId);
+    await selectNode(node);
+}
+
+/** Selects a new node and adds it to visited node history */
+async function selectNewNode(node) {
+    const lastIdx = nodeHistory.length - 1;
+    if (currHistIdx < lastIdx)
+        nodeHistory.splice((currHistIdx + 1), lastIdx - currHistIdx, node.id)
+    else
+        nodeHistory.push(node.id);
+    currHistIdx++;
+    console.log(nodeHistory);
+    await selectNode(node);
+}
+
+/** Selects a new node using the node id */
+async function selectNewNodeById(nodeId) {
+    const node = sigmaInst.graph.nodes().find(n => n.id == nodeId);
+    await selectNewNode(node);
+}
+
 /** Moves the camera to a node */
 function centerCameraOnNode(n) {
     const c = sigmaInst.camera;
@@ -256,12 +282,6 @@ function centerCameraOnNode(n) {
         }, 
         { duration: config.graph.animationTime }
     );
-}
-
-/** Selects a node using the node id */
-async function selectNodeById(nodeId) {
-    const node = sigmaInst.graph.nodes().find(n => n.id == nodeId);
-    await selectNode(node);
 }
 
 /** Displays series data in the side panel for the given series */
@@ -327,7 +347,7 @@ async function displaySeriesData(nodeId) {
     for (const neighborEdge of neighborEdges) {
         const neighborId = (neighborEdge.source == nodeId) ? neighborEdge.target : neighborEdge.source;
         const s = seriesMap.get(neighborId);
-        seriesNeighborText.append(`<a href="javascript:void(0)" onclick="selectNodeById(${neighborId})"` + 
+        seriesNeighborText.append(`<a href="javascript:void(0)" onclick="selectNewNodeById(${neighborId})"` + 
                                   `onmouseover="induceNodeHover(${neighborId})" onmouseout="induceNodeUnhover(${neighborId})">` + 
                                   `${s.name} (${neighborEdge.weight}) </a><br/>`);
     }
@@ -496,7 +516,7 @@ function searchSeries() {
                 emptyIfNull(series.jpName).toLowerCase().includes(input) ||
                 series.altNames.some(name => name.toLowerCase().includes(input))) {
 
-                searchResults.append(`<a href="javascript:void(0)" onclick="selectNodeById(${series.id})"` +
+                searchResults.append(`<a href="javascript:void(0)" onclick="selectNewNodeById(${series.id})"` +
                                      `onmouseover="induceNodeHover(${series.id})" onmouseout="induceNodeUnhover(${series.id})">` + 
                                      `${series.name} </a><br/>`);
             }
@@ -591,6 +611,28 @@ function resetZoom() {
         }, 
         { duration: config.graph.animationTime }
     );
+}
+
+/** Go forward to a previously viewed node */
+function forwardNode() {
+    if (currHistIdx < 0 || nodeHistory.length == 0)
+        return;
+    if (currHistIdx < nodeHistory.length - 1) {
+        selectNodeById(nodeHistory[currHistIdx+1]);
+        currHistIdx++;
+    }
+}
+
+/** Go back to a previously viewed node */
+function backNode() {
+    if (currHistIdx < 0 || nodeHistory.length == 0)
+        return;
+    if (selectedNodeId == null) {
+        selectNodeById(nodeHistory[currHistIdx]);
+    } else if (currHistIdx > 0) {
+        selectNodeById(nodeHistory[currHistIdx - 1]);
+        currHistIdx--;
+    }
 }
 
 /** Returns string for whether this graph is for anime of manga*/
