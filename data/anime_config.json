@@ -11,7 +11,11 @@
     "defaultLabelHoverColor": "#fff",
     "defaultHoverLabelBGColor": "#26448f",
     "zoomMax": 1.5,
-    "zoomMin": 0.025
+    "zoomMin": 0.025,
+    "hoverImageSize": 7,
+    "minHoverImageSize": 20,
+    "hoverTextScale": 1.25,
+    "hoverBorderSize": 10
   },
   "graph": {
     "edgeColor": "#777",

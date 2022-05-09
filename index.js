@@ -1,16 +1,17 @@
-let sigmaInst; // sigma graph instance
-let seriesMap; // dictionary of series data
-let genresMap; // dictionary of genre data
-let metadata;  // data metadata
-let config;    // configuration info
+let sigmaInst;              // sigma graph instance
+let seriesMap;              // dictionary of series data
+let genresMap;              // dictionary of genre data
+let metadata;               // data metadata
+let config;                 // configuration info
+let isAnimeGraph = true;    // whether graph is for anime of manga
 
-let yearThreshold;         // minimum year shown
-let scoreThreshold = 0;    // minimum score shown
-let selectedNodeId = null; // selected node id
-let userData = null;       // data retrieved for a user
-let isAnimeGraph = true;   // whether graph is for anime of manga
-let nodeHistory = [];      // visited node id history 
-let currHistIdx = -1;      // current index in node history
+let yearThreshold;          // minimum year shown
+let scoreThreshold = 0;     // minimum score shown
+let selectedNodeId = null;  // selected node id
+let userData = null;        // data retrieved for a user
+let nodeHistory = [];       // visited node id history 
+let currHistIdx = -1;       // current index in node history
+let imgCache = {};          // cache of node images
 
 /** Initialize the site */
 function init(isAnime) {
@@ -49,6 +50,124 @@ function initSigma() {
             context.lineWidth = node.borderWidth || 1;
             context.strokeStyle = node.borderColor || node.color || settings('defaultNodeColor');
             context.stroke();
+        }
+    };
+
+    // Custom hovered node renderer - mix of library definition, 
+    // custom shapes plugin definition, and custom image logic
+    sigma.canvas.hovers.def = function(node, context, settings) {
+        let x, y, w, h, e;
+        const fontStyle = settings('hoverFontStyle') || settings('fontStyle');
+        const prefix = settings('prefix') || '';
+        let drawImage = true;
+        //TODO: grab size ratio not from the global sigma instance
+        let size = (settings('hoverImageSize') || 1) / Math.sqrt(sigmaInst.camera.ratio);
+        if (size < (settings('minHoverImageSize') || 20)) {
+            drawImage = false;
+            size =  node[prefix + 'size'];
+        }
+        const fontSize = (settings('hoverTextScale') || 1) * ((settings('labelSize') === 'fixed') ? 
+            settings('defaultLabelSize') : settings('labelSizeRatio') * size);
+
+        // Draw label background:
+        context.font = (fontStyle ? fontStyle + ' ' : '') +
+            fontSize + 'px ' + (settings('hoverFont') || settings('font'));
+        context.beginPath();
+        context.fillStyle = settings('labelHoverBGColor') === 'node' ?
+            (node.color || settings('defaultNodeColor')) :
+            settings('defaultHoverLabelBGColor');
+
+        if (node.label && settings('labelHoverShadow')) {
+            context.shadowOffsetX = 0;
+            context.shadowOffsetY = 0;
+            context.shadowBlur = 8;
+            context.shadowColor = settings('labelHoverShadowColor');
+        }
+    
+        if (node.label && typeof node.label === 'string') {
+            x = Math.round(node[prefix + 'x'] - fontSize / 2 - 2);
+            y = Math.round(node[prefix + 'y'] - fontSize / 2 - 2);
+            w = Math.round(
+                context.measureText(node.label).width + fontSize / 2 + size + 7
+            );
+            h = Math.round(fontSize + 4);
+            e = Math.round(fontSize / 2 + 2);
+
+            context.moveTo(x, y + e);
+            context.arcTo(x, y, x + e, y, e);
+            context.lineTo(x + w, y);
+            context.lineTo(x + w, y + h);
+            context.lineTo(x + e, y + h);
+            context.arcTo(x, y + h, x, y + h - e, e);
+            context.lineTo(x, y + e);
+
+            context.closePath();
+            context.fill();
+
+            context.shadowOffsetX = 0;
+            context.shadowOffsetY = 0;
+            context.shadowBlur = 0;
+        } 
+
+        // Draw the image if zoomed in far enough, original node if not
+        if (drawImage) {
+            // Load / draw image
+            const imgUrl = node.imageUrl;
+            let image = imgCache[imgUrl];
+            if (!image) {
+                image = document.createElement('img');
+                image.src = imgUrl;
+                image.isReady = false;
+                // Refresh graph once image loads
+                image.onload = function(){
+                    image.isReady = true;
+                    sigmaInst.refresh();
+                };
+                imgCache[imgUrl] = image;
+            } else if (image.isReady) {
+                x = node[prefix + 'x'];
+                y = node[prefix + 'y']; 
+                let ih = image.height;
+                let iw = image.width;
+                let minDim = Math.min(ih, iw);
+                let ratio = size / minDim * 2;
+        
+                // Draw the clipping disc:
+                // Enter clipping mode
+                context.save();
+                context.beginPath();
+                context.arc(x, y, size, 0, Math.PI*2, true);
+                context.closePath();
+                context.clip();
+                // Draw the image
+                context.drawImage(image, x-iw*ratio/2, y-ih*ratio/2, iw*ratio, ih*ratio);
+                // Exit clipping mode    
+                context.restore(); 
+
+                // Draw image border
+                context.beginPath();
+                context.arc(node[prefix+'x'], node[prefix+'y'], size, 0, Math.PI * 2, true);
+                context.lineWidth = settings('borderSize') || 1; //
+                context.strokeStyle = settings('defaultHoverLabelBGColor'); //
+                context.stroke();
+            }
+        // Otherwise just draw the node normally
+        } else {
+            const nodeRenderer = sigma.canvas.nodes[node.type] || sigma.canvas.nodes.def;
+            nodeRenderer(node, context, settings);
+        }
+
+        // Display the label:
+        if (node.label && typeof node.label === 'string') {
+            context.fillStyle = (settings('labelHoverColor') === 'node') ?
+                (node.color || settings('defaultNodeColor')) :
+                settings('defaultLabelHoverColor');
+
+            context.fillText(
+                node.label,
+                Math.round(node[prefix + 'x'] + size + 3),
+                Math.round(node[prefix + 'y'] + fontSize / 3)
+            ); 
         }
     };
 }
@@ -150,7 +269,8 @@ function initGraph(data) {
             size: node.size,
             color: node.color,
             borderColor: null,
-            borderWidth: config.graph.borderWidth
+            borderWidth: config.graph.borderWidth,
+            imageUrl: metadata.imgBaseUrl + node.imgUrlPath
         })
     }
 
@@ -183,7 +303,11 @@ function initGraph(data) {
         defaultLabelHoverColor: config.sigma.defaultLabelHoverColor,
         defaultHoverLabelBGColor: config.sigma.defaultHoverLabelBGColor,
         zoomMax: config.sigma.zoomMax,
-        zoomMin: config.sigma.zoomMin
+        zoomMin: config.sigma.zoomMin,
+        hoverImageSize: config.sigma.hoverImageSize,
+        minHoverImageSize: config.sigma.minHoverImageSize,
+        hoverTextScale: config.sigma.hoverTextScale,
+        borderSize: config.sigma.hoverBorderSize
     };
 
     // Create sigma instance
