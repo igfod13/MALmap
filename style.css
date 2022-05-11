@@ -63,7 +63,7 @@ input[type="checkbox"] {
     border: none;
     border-bottom: 1px solid #999;
     outline: none;
-    width: 85%; 
+    width: 80%; 
     padding-left: 0.5em;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
@@ -124,8 +124,23 @@ input[type="checkbox"] {
     position: absolute;
     top: 0;
     left: 8px;
-    font-size: 36px;
-    text-decoration: none;
+    font-size: 32px;
+    color: #999;
+}
+
+.side-panel .back-btn {
+    position: absolute;
+    top: 5px;
+    left: 35%;
+    font-size: 24px;
+    color: #999;
+}
+
+.side-panel .fwd-btn {
+    position: absolute;
+    top: 5px;
+    left: 52.5%;
+    font-size: 24px;
     color: #999;
 }
 
@@ -139,9 +154,17 @@ input[type="checkbox"] {
 }
 
 .clear-btn {
-    text-decoration: none;
     color: #999;
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.no-outline-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }
 
 .zoom-btn {
@@ -151,4 +174,8 @@ input[type="checkbox"] {
     cursor: pointer;
     overflow: hidden;
     outline: none;
+}
+
+.center {
+    text-align:center
 }
