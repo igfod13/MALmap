@@ -61,7 +61,7 @@ input[type="checkbox"] {
     font-size: 14px;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #777;
     outline: none;
     width: 80%; 
     padding-left: 0.5em;
@@ -73,14 +73,14 @@ input[type="checkbox"] {
     -webkit-appearance: none;
     width: 80%;
     height: 2px;
-    background: #999;
+    background: #777;
 }
 
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 0.5em;
     height: 0.5em;
-    background: #999;
+    background: #777;
     cursor: pointer;
     border-radius: 50%;
     border: none; 
@@ -89,7 +89,7 @@ input[type="checkbox"] {
 .slider::-moz-range-thumb {
     width: 0.5em;
     height: 0.5em;
-    background: #999;
+    background: #777;
     cursor: pointer;
     border-radius: 50%; 
     border: none;
@@ -123,9 +123,9 @@ input[type="checkbox"] {
 .side-panel .close-btn {
     position: absolute;
     top: 0;
-    left: 8px;
+    left: 0px;
     font-size: 32px;
-    color: #999;
+    color: #777;
 }
 
 .side-panel .back-btn {
@@ -133,15 +133,15 @@ input[type="checkbox"] {
     top: 5px;
     left: 35%;
     font-size: 24px;
-    color: #999;
+    color: #777;
 }
 
 .side-panel .fwd-btn {
     position: absolute;
     top: 5px;
-    left: 52.5%;
+    left: 50%;
     font-size: 24px;
-    color: #999;
+    color: #777;
 }
 
 #series-info {
@@ -154,7 +154,7 @@ input[type="checkbox"] {
 }
 
 .clear-btn {
-    color: #999;
+    color: #777;
     font-size: 18px;
 }
 
