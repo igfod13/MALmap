@@ -296,7 +296,9 @@ function initGraph(data) {
 
     // Check if device can hover
     const canHover = window.matchMedia("(hover: hover)").matches; 
-    
+    if (!canHover)
+        toggleDetails();
+
     // Setup settings
     const settings = {
         defaultNodeType: 'border',
