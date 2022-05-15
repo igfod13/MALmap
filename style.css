@@ -38,6 +38,10 @@ hr {
     border: none;
 }
 
+.center {
+    text-align:center
+}
+
 input[type="checkbox"] {
     cursor: pointer;
 }
@@ -173,7 +177,7 @@ input[type="checkbox"] {
     outline: none;
 }
 
-.zoom-btn {
+.icon-btn {
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
@@ -185,10 +189,20 @@ input[type="checkbox"] {
     height: 1.75em;
 }
 
-.zoom-btn:hover {
+.icon-btn:hover {
     background: #999;
 }
 
-.center {
-    text-align:center
+.details-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: 2px solid #777;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    border-radius: 4px;
+}
+
+.details-btn:hover {
+    background: #999;
 }

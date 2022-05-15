@@ -12,12 +12,19 @@ let userData = null;        // data retrieved for a user
 let nodeHistory = [];       // visited node id history 
 let currHistIdx = -1;       // current index in node history
 let imgCache = {};          // cache of node images
+let detailsShown = true;    // whether the main panel is currently shown
 
 /** Initialize the site */
 function init(isAnime) {
     isAnimeGraph = isAnime;
+    initHtml();
     initSigma();
     jQuery(initPage());
+}
+
+/** Initialize the html for main and series panels */
+function initHtml() {
+    $("#panels").load("panels.html"); 
 }
 
 /** Initialize sigma helper methods */ 
@@ -192,7 +199,8 @@ async function initPage() {
 /** Initialize the main panel */
 function initMainPanel() {
     // Init text
-    $("#title-img").attr("src", config.headerImage); 
+    $("#title-img").attr("src", config.headerImage);
+    $("#title").text(config.title);
     $("#intro").html(config.intro);
     $("#last-updated").append(metadata.lastUpdated);
     
@@ -760,6 +768,24 @@ function backNode() {
         selectNodeById(nodeHistory[currHistIdx - 1]);
         currHistIdx--;
     }
+}
+
+/** Toggle whether the main panel details are shown */
+function toggleDetails() {
+    const detailsButton = $("#toggle-details");
+    detailsButton.empty(); // clear any existing text
+    if (detailsShown) {
+        $("#panel-details").hide();
+        detailsButton.append(
+            $(document.createElement('i')).prop({ class: 'bi-plus' })
+        );
+    } else {
+        $("#panel-details").show();
+        detailsButton.append(
+            $(document.createElement('i')).prop({ class: 'bi-dash' })
+        );
+    }
+    detailsShown = !detailsShown;
 }
 
 /** Returns string for whether this graph is for anime of manga*/

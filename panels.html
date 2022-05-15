@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <!-- Main sidebar-->
+    <div id="main-panel">
+
+      <!-- Title image -->
+      <div>
+        <img src="images/malmap_logo.png" id="title-img" class="contained-img">
+      </div>
+      <!-- Title -->
+      <h2>
+        <span id="title"> MALmap </span>
+        <span class="float-right">
+          <button id="toggle-details" class="details-btn" onclick="toggleDetails()" title="Show/hide details">
+            <i class="bi-dash"></i>
+          </button>
+        </span>
+      </h2>
+
+      <div id="panel-details">
+        <!-- Info text -->
+        <hr>
+        <div id="intro"></div>
+        <br>
+        <div id="last-updated"> Last updated: </div>
+        <hr>
+
+        <!-- Zoom buttons  -->
+        <div class="center">
+          <span class="sub-header">
+            <button class="icon-btn" onclick="zoom(out=false)" title="Zoom in">
+              <i class="bi-zoom-in"></i>
+            </button>
+            <button class="icon-btn" onclick="zoom(out=true)" title="Zoom out">
+              <i class="bi-zoom-out"></i>
+            </button>
+            <button class="icon-btn" onclick="resetZoom()" title="Reset zoom">
+              <i class="bi-arrows-fullscreen"></i>
+            </button>
+            &emsp;
+            <button class="icon-btn" onclick="backNode()" title="Back">
+              <i class="bi-arrow-left"></i>
+            </button>
+            <button class="icon-btn" onclick="forwardNode()" title="Forward">
+              <i class="bi-arrow-right"></i>
+            </button>
+          </span>
+        </div>
+
+        <!-- User filter -->
+        <div class="sub-header"> MAL User </div>
+        <span>
+          <input type="text" id="user-filter" class="searchbar" placeholder="Username" onkeyup="enterUser(event)"
+            title="Enter a username to highlight a user's MAL list">
+          <button class="clear-btn no-outline-btn" onclick="clearUser()" title="Clear user">
+            <i class="bi-x"></i>
+          </button>
+        </span>
+
+        <!-- Filters -->
+        <details>
+          <summary class="sub-header clickable" title="Filter by genre, score, and year"> Filters </summary>
+
+          <!-- Genre filter -->
+          <div class="sub-header"> Genres </div>
+          <div id="checkbox-actions">
+            <span>
+              <a href="javascript:void(0)" class="checkbox-btn" onclick="checkAll(true)">Check all</a>
+            </span>
+            <span class="float-right">
+              <a href="javascript:void(0)" class="checkbox-btn" onclick="checkAll(false)">Uncheck all</a>
+            </span>
+          </div>
+          <div id="checkbox-container"></div>
+
+          <!-- Score filter -->
+          <div class="sub-header"> Score </div>
+          <input type="range" id="score-slider" class="slider" min="0" max="10" value="0" step="0.01">
+          <span id="score-val" class="float-right"></span>
+
+          <!-- Year filter -->
+          <div class="sub-header"> Year </div>
+          <input type="range" id="year-slider" class="slider">
+          <span id="year-val" class="float-right"></span>
+        </details>
+
+        <!-- Search  -->
+        <div class="sub-header"> Search </div>
+        <span>
+          <input type="text" id="series-search" class="searchbar" placeholder="Search.." onkeyup="searchSeries()">
+          <button class="clear-btn no-outline-btn" onclick="clearSearch()" title="Clear search">
+            <i class="bi-x"></i>
+          </button>
+        </span>
+        <div class="sub-header" id="results-header"></div>
+        <div id="search-results"></div>
+      </div>
+    </div>
+
+    <!-- Selected series side panel -->
+    <div class="side-panel" id="series-info-panel">
+      <!-- Close, forward, and back buttons -->
+      <button class="close-btn no-outline-btn" onclick="closeSidePanel()" title="Close sidebar">
+        <i class="bi-x"></i>
+      </button>
+      <button class="back-btn no-outline-btn" onclick="backNode()" title="Back">
+        <i class="bi-arrow-left"></i>
+      </button>
+      <button class="fwd-btn no-outline-btn" onclick="forwardNode()" title="Forward">
+        <i class="bi-arrow-right"></i>
+      </button>
+      <!-- Series info -->
+      <div id="series-info">
+        <!-- Series image -->
+        <a href id="series-img-link">
+          <img id="series-img" class="contained-img">
+        </a>
+        <!-- Series title -->
+        <h2>
+          <a id="series-title"></a>
+        </h2>
+        <!-- Series data -->
+        <div id="series-data"></div>
+        <!-- Connected neighbors -->
+        <h3> Recommendations: </h3>
+        <div id="series-neighbors"></div>
+      </div>
+    </div>
+  </body>
+</html>
