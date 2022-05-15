@@ -286,10 +286,13 @@ function initGraph(data) {
         })   
     }
 
+    // Check if device can hover
+    const canHover = window.matchMedia("(any-hover: hover)").matches; 
+    
     // Setup settings
     const settings = {
         defaultNodeType: 'border',
-        hideEdgesOnMove: true,
+        hideEdgesOnMove: canHover,
         batchEdgesDrawing: false, 
         immutable: true,
         hoverFontStyle: "bold",
