@@ -287,7 +287,7 @@ function initGraph(data) {
     }
 
     // Check if device can hover
-    const canHover = window.matchMedia("(any-hover: hover)").matches; 
+    const canHover = window.matchMedia("(hover: hover)").matches; 
     
     // Setup settings
     const settings = {
