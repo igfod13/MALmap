@@ -593,6 +593,8 @@ function unselectNodes() {
 /** Redraws graph upon node hovering. Makes all non-neighbor nodes and edges black,
  *  and redraws neighboring edges on top */
 function hoverNode(node) {
+    // Unhover nodes in case there is a node still stuck on hover
+    unhoverNode();
     // Change pointer 
     $("#sigma-container")[0].style.cursor = 'pointer';
     // Reset node color and label if it was previously filtered out
