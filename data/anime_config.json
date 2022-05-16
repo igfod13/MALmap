@@ -1,5 +1,5 @@
 {
-  "intro": "An interactive network graph of anime based on <a href=\"http:\/\/myanimelist.net\/\">MyAnimeList</a> recommendations. Connections between two series reflect the number of recs made by users.  <a href=\"https://github.com/igfod13/MALmap\">Github</a> <br><br> For a map of manga: <a href=\"manga.html\">MALmap-manga</a>",
+  "intro": "An interactive network graph visualization of anime based on <a href=\"http:\/\/myanimelist.net\/\">MyAnimeList</a> recommendations. Connections between two series reflect the number of recs made by users.  <a href=\"https://github.com/igfod13/MALmap\">Github</a> <br><br> For a map of manga: <a href=\"manga.html\">MALmap-manga</a>",
   "title": "MALmap",
   "sigma": {
     "maxNodeSize": 1.5,
