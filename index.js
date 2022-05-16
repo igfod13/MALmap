@@ -792,6 +792,12 @@ function toggleDetails() {
     detailsShown = !detailsShown;
 }
 
+/** Snapshot and save the current graph */
+function snapshot() {
+    if (confirm("Save snapshot?") == true)
+        sigmaInst.renderers[0].snapshot({download: true});
+}
+
 /** Returns string for whether this graph is for anime of manga*/
 function graphType() {
     return isAnimeGraph? 'anime' : 'manga';
