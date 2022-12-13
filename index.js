@@ -683,7 +683,8 @@ async function enterUser(ele) {
 async function selectUser(username) {
     // RIP Jikan user lists, MAL cors policy blocks requests so corsanywhere it is :/
     //const proxy_url = 'https://corsanywhere.herokuapp.com/';
-    const proxy_url = 'https://proxy.cors.sh/';
+    //const proxy_url = 'https://proxy.cors.sh/';
+    const proxy_url = 'https://corsproxy.io/?';
     const mal_url = `https://api.myanimelist.net/v2/users/${username}/${graphType()}list`;
 
     // Get user data
@@ -695,7 +696,8 @@ async function selectUser(username) {
         const full_url = `${proxy_url}${mal_url}?` + new URLSearchParams({
             'limit': limit,
             'offset': offset,
-            'fields': 'list_status'
+            'fields': 'list_status',
+            'nsfw': 1
         }).toString();
 
         try {
