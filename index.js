@@ -682,7 +682,8 @@ async function enterUser(ele) {
 /** Retrieves user data and recolors node (borders?) */
 async function selectUser(username) {
     // RIP Jikan user lists, MAL cors policy blocks requests so corsanywhere it is :/
-    const proxy_url = 'https://corsanywhere.herokuapp.com/';
+    //const proxy_url = 'https://corsanywhere.herokuapp.com/';
+    const proxy_url = 'https://proxy.cors.sh/';
     const mal_url = `https://api.myanimelist.net/v2/users/${username}/${graphType()}list`;
 
     // Get user data
