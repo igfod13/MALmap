@@ -7,7 +7,7 @@
     "maxEdgeSize": 0.5,
     "minEdgeSize": 0.05,
     "defaultLabelSize" : 12,
-    "labelThreshold": 3.5,
+    "labelThreshold": 3.0,
     "defaultLabelColor": "#fff",
     "defaultLabelHoverColor": "#fff",
     "defaultHoverLabelBGColor": "#26448f",
